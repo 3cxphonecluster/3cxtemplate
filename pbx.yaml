@@ -17,7 +17,13 @@ spec:
         image: 3cxphonecluster/3cximage01
         ports:
         - name: api
-          containerPort: 5000
+          containerPort: 5015
+          containerPort: 5001
+          containerPort: 443
+          containerPort: 5060
+          containerPort: 5061
+          containerPort: 5090
+          containerPort: 9000
 ---
 apiVersion: v1
 kind: Service
