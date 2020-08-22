@@ -1,12 +1,12 @@
-apiVersion: apps/v1
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
 metadata:
-  name: pbx
+  name: pbx-deployment
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: pbx
+  replicas: 1 # tells deployment to run 2 pods matching the template
   template:
     metadata:
       labels:
@@ -14,25 +14,6 @@ spec:
     spec:
       containers:
       - name: pbx
-        image: 3cxphonecluster/3cximage01
+        image: 3cxphonecluster/3cximage01:latest
         ports:
-        - name: api
-          containerPort: 5015
-          containerPort: 5001
-          containerPort: 443
-          containerPort: 5060
-          containerPort: 5061
-          containerPort: 5090
-          containerPort: 9000
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: pbx
-spec:
-  type: LoadBalancer
-  selector:
-    app: pbx
-  ports:
-  - port: 5000
-    name: api
+        - containerPort: 80
