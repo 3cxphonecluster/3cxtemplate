@@ -16,4 +16,11 @@ spec:
       - name: pbx
         image: 3cxphonecluster/3cximage01:latest
         ports:
-        - containerPort: 80
+        - containerPort: 3015
+        - containerPort: 3001
+        - containerPort: 443
+        - containerPort: 5060
+        - containerPort: 5061
+        - containerPort: 5090
+        - containerPort: 9000
+        - containerPort: 9001
