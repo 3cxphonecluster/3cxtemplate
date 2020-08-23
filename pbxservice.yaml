@@ -1,13 +1,26 @@
-apiVersion: v1
-kind: Service
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
 metadata:
   name: pbx-deployment
 spec:
   selector:
-    app: pbx
-  ports:
-    - protocol: TCP
-      port: 5001
-      targetPort: 5001
-      nodePort:  30000
-    type: NodePort
+    matchLabels:
+      app: pbx
+  replicas: 1 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: pbx
+    spec:
+      containers:
+      - name: pbx
+        image: 3cxphonecluster/3cximage01:latest
+        ports:
+        - containerPort: 3015
+        - containerPort: 3001
+        - containerPort: 443
+        - containerPort: 5060
+        - containerPort: 5061
+        - containerPort: 9000
+        - containerPort: 9001
+        - containerPort: 9002
