@@ -1,26 +1,35 @@
-apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
-kind: Deployment
-metadata:
-  name: pbx-deployment
-spec:
-  selector:
-    matchLabels:
-      app: pbx
-  replicas: 1 # tells deployment to run 2 pods matching the template
-  template:
-    metadata:
-      labels:
-        app: pbx
-    spec:
-      containers:
-      - name: pbx
-        image: 3cxphonecluster/3cximage01:latest
-        ports:
-        - containerPort: 3015
-        - containerPort: 3001
-        - containerPort: 443
-        - containerPort: 5060
-        - containerPort: 5061
-        - containerPort: 9000
-        - containerPort: 9001
-        - containerPort: 9002
+apiVersion: v1
+kind: Service
+metadata: 
+  name: pbx-access-services
+  labels: 
+    name: pbx-access-service
+spec: 
+  type: LoadBalancer
+  ports:
+  - name: threecx-pbx-advanced-access
+    port: 5001
+    targetPort: 5001
+  - name: threecx-pbx-basic-access1
+    port: 5015
+    targetPort: 5015
+  - name: threecx-pbx-basic-access2
+    port: 443
+    targetPort: 443
+  - name: threecx-pbx-sip-rn
+    port: 5060
+    targetPort: 5060
+  - name: threecx-pbx-sec-sip-rn
+    port: 5061
+    targetPort: 5061
+  - name: threecx-pbx-tunnel
+    port: 5090
+    targetPort: 5090
+  - name: threecx-pbx-mediaserver9000
+    port: 9000
+    targetPort: 9000
+  - name: threecx-pbx-mediaserver9001
+    port: 9001
+    targetPort: 9001
+  selector: 
+    name: pbx-deployment
