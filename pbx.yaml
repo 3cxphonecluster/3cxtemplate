@@ -33,5 +33,14 @@ spec:
           name: log-disk
       volumes:
       - name: backup-disk
+        gcePersistentDisk:
+          pdName: pbx-disk
+          fsType: ext4
       - name: recording-disk
+        gcePersistentDisk:
+          pdName: pbx-disk
+          fsType: ext4
       - name: log-disk
+        gcePersistentDisk:
+          pdName: pbx-disk
+          fsType: ext4
