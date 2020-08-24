@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: pbx
-        image: 3cxphonecluster/3cximage01:latest
+        image: 3cxphonecluster/image01:latest
         ports:
         - containerPort: 3015
         - containerPort: 3001
@@ -24,3 +24,14 @@ spec:
         - containerPort: 5090
         - containerPort: 9000
         - containerPort: 9001
+        volumeMounts:
+        - mountPath: /mnt/backup
+          name: backup-disk
+        - mountPath: /mnt/recordings
+          name: recording-disk
+        - mountPath: /var/log
+          name: log-disk
+      volumes:
+      - name: backup-disk
+      - name: recording-disk
+      - name: log-disk
